@@ -1,0 +1,252 @@
+{
+  "name": "N8N-Offline Demo Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "webhook-demo",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300],
+      "webhookId": "demo-webhook"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.action}}",
+              "operation": "equal",
+              "value2": "process_data"
+            }
+          ]
+        }
+      },
+      "id": "check-action",
+      "name": "Check Action",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Xử lý dữ liệu đầu vào\nconst inputData = $input.all();\nconst processedData = [];\n\nfor (const item of inputData) {\n  const data = item.json;\n  \n  // Xử lý logic nghiệp vụ\n  const processed = {\n    id: data.id || Date.now(),\n    name: data.name || 'Unknown',\n    email: data.email || '',\n    status: 'processed',\n    processedAt: new Date().toISOString(),\n    originalData: data\n  };\n  \n  // Validation\n  if (processed.email && processed.email.includes('@')) {\n    processed.emailValid = true;\n  } else {\n    processed.emailValid = false;\n    processed.errors = processed.errors || [];\n    processed.errors.push('Invalid email format');\n  }\n  \n  processedData.push({ json: processed });\n}\n\nreturn processedData;"
+      },
+      "id": "process-data",
+      "name": "Process Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 200]
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "resource": "spreadsheet",
+        "title": "N8N Processed Data",
+        "sheetsUi": {
+          "sheetValues": [
+            {
+              "sheetName": "ProcessedData",
+              "headerRow": true,
+              "values": {
+                "values": [
+                  ["ID", "Name", "Email", "Status", "Processed At", "Email Valid", "Errors"]
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "id": "create-sheet",
+      "name": "Create Google Sheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [900, 200]
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": "={{$node['Create Google Sheet'].json.spreadsheetId}}",
+        "sheetName": "ProcessedData",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "ID": "={{$json.id}}",
+            "Name": "={{$json.name}}",
+            "Email": "={{$json.email}}",
+            "Status": "={{$json.status}}",
+            "Processed At": "={{$json.processedAt}}",
+            "Email Valid": "={{$json.emailValid}}",
+            "Errors": "={{$json.errors ? $json.errors.join(', ') : ''}}"
+          }
+        },
+        "options": {}
+      },
+      "id": "append-to-sheet",
+      "name": "Append to Sheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [1120, 200]
+    },
+    {
+      "parameters": {
+        "channel": "#general",
+        "text": "🎉 Dữ liệu đã được xử lý thành công!\n\n📊 **Thống kê:**\n- Tổng số records: {{$node['Process Data'].json.length}}\n- Email hợp lệ: {{$node['Process Data'].json.filter(item => item.emailValid).length}}\n- Có lỗi: {{$node['Process Data'].json.filter(item => item.errors && item.errors.length > 0).length}}\n\n🔗 **Google Sheet:** {{$node['Create Google Sheet'].json.spreadsheetUrl}}\n\n⏰ Xử lý lúc: {{new Date().toLocaleString('vi-VN')}}"
+      },
+      "id": "notify-slack",
+      "name": "Notify Slack",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2,
+      "position": [1340, 200]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"success\": true,\n  \"message\": \"Dữ liệu đã được xử lý thành công\",\n  \"processedCount\": {{$node['Process Data'].json.length}},\n  \"spreadsheetUrl\": \"{{$node['Create Google Sheet'].json.spreadsheetUrl}}\",\n  \"timestamp\": \"{{new Date().toISOString()}}\"\n}"
+      },
+      "id": "success-response",
+      "name": "Success Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1560, 200]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"success\": false,\n  \"message\": \"Action không hợp lệ. Vui lòng sử dụng action: 'process_data'\",\n  \"receivedAction\": \"{{$json.action || 'undefined'}}\",\n  \"timestamp\": \"{{new Date().toISOString()}}\"\n}",
+        "options": {
+          "responseCode": 400
+        }
+      },
+      "id": "error-response",
+      "name": "Error Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [680, 400]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Log workflow execution\nconst logData = {\n  workflowId: $workflow.id,\n  workflowName: $workflow.name,\n  executionId: $execution.id,\n  startTime: new Date().toISOString(),\n  inputData: $input.all(),\n  nodeCount: Object.keys($workflow.nodes).length\n};\n\nconsole.log('N8N-Offline Workflow Started:', JSON.stringify(logData, null, 2));\n\nreturn $input.all();"
+      },
+      "id": "log-start",
+      "name": "Log Workflow Start",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [350, 300]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Log Workflow Start",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Workflow Start": {
+      "main": [
+        [
+          {
+            "node": "Check Action",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Action": {
+      "main": [
+        [
+          {
+            "node": "Process Data",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Error Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process Data": {
+      "main": [
+        [
+          {
+            "node": "Create Google Sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Google Sheet": {
+      "main": [
+        [
+          {
+            "node": "Append to Sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append to Sheet": {
+      "main": [
+        [
+          {
+            "node": "Notify Slack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notify Slack": {
+      "main": [
+        [
+          {
+            "node": "Success Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "id": "n8n-offline-demo",
+  "tags": [
+    {
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z",
+      "id": "demo",
+      "name": "Demo"
+    },
+    {
+      "createdAt": "2024-01-01T00:00:00.000Z", 
+      "updatedAt": "2024-01-01T00:00:00.000Z",
+      "id": "automation",
+      "name": "Automation"
+    }
+  ]
+}

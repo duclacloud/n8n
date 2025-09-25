@@ -1,0 +1,111 @@
+ID,Full Name,First Name,Last Name,Phone,Email,Events,Manager,Active
+1,Aisha Chowdhury,Aisha,Chowdhury,555-555-0001,aisha.c@example.com,"Summer Fair, Fall Return",Marjorie,TRUE
+2,Takeshi Sato,Takeshi,Sato,555-555-0002,takeshi.s@example.com,Winter Festival,Nitin,TRUE
+3,Manpreet Kaur,Manpreet,Kaur,555-555-0003,manpreet.k@example.com,"Fall Return, Spring Awakening",Natalie,FALSE
+4,Sofia Hernandez,Sofia,Hernandez,555-555-0004,sofia.h@example.com,Spring Awakening,Simon,FALSE
+5,Ethan Smith,Ethan,Smith,555-555-0005,ethan.s@example.com,"Summer Fair, Winter Festival",Natalie,TRUE
+6,Wei Zhang,Wei,Zhang,555-555-0006,wei.z@example.com,"Winter Festival, Spring Awakening",Marjorie,FALSE
+7,Layla Johnson,Layla,Johnson,555-555-0007,layla.j@example.com,Fall Return,Nitin,TRUE
+8,Michael Osei,Michael,Osei,555-555-0008,michael.o@example.com,"Spring Awakening, Summer Fair",Simon,TRUE
+9,Jasmin Petrovic,Jasmin,Petrovic,555-555-0009,jasmin.p@example.com,"Summer Fair, Fall Return",Natalie,FALSE
+10,Noor Al-Fulan,Noor,Al-Fulan,555-555-0010,noor.af@example.com,Spring Awakening,Marjorie,TRUE
+11,Noor Johnson,Noor,Johnson,555-555-0011,noor.johnson@example.com,Winter Festival,Marjorie,FALSE
+12,Carlos Li,Carlos,Li,555-555-0012,carlos.li@example.com,"Fall Return, Spring Awakening",Natalie,TRUE
+13,Mei Smith,Mei,Smith,555-555-0013,mei.smith@example.com,Spring Awakening,Natalie,TRUE
+14,Amina Ivanova,Amina,Ivanova,555-555-0014,amina.ivanova@example.com,"Winter Festival, Summer Fair",Natalie,TRUE
+15,Talia Abdi,Talia,Abdi,555-555-0015,talia.abdi@example.com,Fall Return,Simon,TRUE
+16,Liam Chowdhury,Liam,Chowdhury,555-555-0016,liam.chowdhury@example.com,"Fall Return, Winter Festival",Nitin,FALSE
+17,Harpreet Al-Fulan,Harpreet,Al-Fulan,555-555-0017,harpreet.al-fulan@example.com,"Summer Fair, Spring Awakening",Nitin,TRUE
+18,Mina Wang,Mina,Wang,555-555-0018,mina.wang@example.com,Fall Return,Nitin,TRUE
+19,Noor Smith,Noor,Smith,555-555-0019,noor.smith@example.com,Fall Return,Marjorie,TRUE
+20,Chen Abdi,Chen,Abdi,555-555-0020,chen.abdi@example.com,"Winter Festival, Spring Awakening",Simon,TRUE
+21,Chen Li,Chen,Li,555-555-0021,chen.li@example.com,"Spring Awakening, Fall Return",Nitin,FALSE
+22,Elio Wang,Elio,Wang,555-555-0022,elio.wang@example.com,"Summer Fair, Winter Festival",Marjorie,FALSE
+23,Leila Wang,Leila,Wang,555-555-0023,leila.wang@example.com,Fall Return,Natalie,TRUE
+24,Dalia Abdi,Dalia,Abdi,555-555-0024,dalia.abdi@example.com,"Spring Awakening, Winter Festival",Marjorie,TRUE
+25,Wei Kaur,Wei,Kaur,555-555-0025,wei.kaur@example.com,"Spring Awakening, Summer Fair",Nitin,TRUE
+26,Elio Okafor,Elio,Okafor,555-555-0026,elio.okafor@example.com,"Spring Awakening, Summer Fair",Simon,FALSE
+27,Isla Patel,Isla,Patel,555-555-0027,isla.patel@example.com,Summer Fair,Natalie,TRUE
+28,Raj Wang,Raj,Wang,555-555-0028,raj.wang@example.com,Spring Awakening,Natalie,FALSE
+29,Vivian Johnson,Vivian,Johnson,555-555-0029,vivian.johnson@example.com,"Fall Return, Summer Fair",Nitin,TRUE
+30,Nora Al-Fulan,Nora,Al-Fulan,555-555-0030,nora.al-fulan@example.com,"Summer Fair, Fall Return",Natalie,FALSE
+31,Raj Johnson,Raj,Johnson,555-555-0031,raj.johnson@example.com,"Summer Fair, Spring Awakening",Simon,FALSE
+32,Jasper Sato,Jasper,Sato,555-555-0032,jasper.sato@example.com,"Spring Awakening, Summer Fair",Nitin,TRUE
+33,Ravi Kaur,Ravi,Kaur,555-555-0033,ravi.kaur@example.com,Summer Fair,Marjorie,TRUE
+34,Imran Osei,Imran,Osei,555-555-0034,imran.osei@example.com,"Summer Fair, Fall Return",Simon,TRUE
+35,Manpreet Osei,Manpreet,Osei,555-555-0035,manpreet.osei@example.com,"Summer Fair, Winter Festival",Nitin,FALSE
+36,Arjun Abdi,Arjun,Abdi,555-555-0036,arjun.abdi@example.com,"Summer Fair, Fall Return",Simon,TRUE
+37,Hassan Osei,Hassan,Osei,555-555-0037,hassan.osei@example.com,Winter Festival,Natalie,FALSE
+38,Carmen Okafor,Carmen,Okafor,555-555-0038,carmen.okafor@example.com,"Summer Fair, Fall Return",Marjorie,FALSE
+39,Keiko Patel,Keiko,Patel,555-555-0039,keiko.patel@example.com,Spring Awakening,Marjorie,TRUE
+40,Elio Petrovic,Elio,Petrovic,555-555-0040,elio.petrovic@example.com,Winter Festival,Natalie,FALSE
+41,Carmen Ivanova,Carmen,Ivanova,555-555-0041,carmen.ivanova@example.com,"Winter Festival, Spring Awakening",Marjorie,TRUE
+42,Raj Johnson,Raj,Johnson,555-555-0042,raj.johnson@example.com,Winter Festival,Nitin,FALSE
+43,Elsa Brown,Elsa,Brown,555-555-0043,elsa.brown@example.com,"Winter Festival, Spring Awakening",Simon,FALSE
+44,Sienna Zhang,Sienna,Zhang,555-555-0044,sienna.zhang@example.com,"Winter Festival, Fall Return",Marjorie,FALSE
+45,Isla Li,Isla,Li,555-555-0045,isla.li@example.com,"Spring Awakening, Winter Festival",Natalie,FALSE
+46,Ravi Johnson,Ravi,Johnson,555-555-0046,ravi.johnson@example.com,"Winter Festival, Summer Fair",Marjorie,FALSE
+47,Manpreet Al-Fulan,Manpreet,Al-Fulan,555-555-0047,manpreet.al-fulan@example.com,"Spring Awakening, Fall Return",Marjorie,FALSE
+48,Freya Johnson,Freya,Johnson,555-555-0048,freya.johnson@example.com,Spring Awakening,Marjorie,FALSE
+49,Emily Osei,Emily,Osei,555-555-0049,emily.osei@example.com,Spring Awakening,Marjorie,FALSE
+50,Vivian Brown,Vivian,Brown,555-555-0050,vivian.brown@example.com,Winter Festival,Simon,TRUE
+51,Alina Li,Alina,Li,555-555-0051,alina.li@example.com,Summer Fair,Nitin,TRUE
+52,Takeshi Ivanova,Takeshi,Ivanova,555-555-0052,takeshi.ivanova@example.com,"Spring Awakening, Fall Return",Natalie,FALSE
+53,Carlos Kaur,Carlos,Kaur,555-555-0053,carlos.kaur@example.com,Summer Fair,Marjorie,TRUE
+54,Isla Petrovic,Isla,Petrovic,555-555-0054,isla.petrovic@example.com,"Summer Fair, Fall Return",Marjorie,TRUE
+55,Tyson Ivanova,Tyson,Ivanova,555-555-0055,tyson.ivanova@example.com,"Fall Return, Winter Festival",Natalie,TRUE
+56,Vivian Okafor,Vivian,Okafor,555-555-0056,vivian.okafor@example.com,"Fall Return, Spring Awakening",Nitin,TRUE
+57,Amara Kaur,Amara,Kaur,555-555-0057,amara.kaur@example.com,Winter Festival,Nitin,FALSE
+58,Keiko Petrovic,Keiko,Petrovic,555-555-0058,keiko.petrovic@example.com,"Spring Awakening, Summer Fair",Nitin,FALSE
+59,Neha Abdi,Neha,Abdi,555-555-0059,neha.abdi@example.com,Winter Festival,Marjorie,TRUE
+60,Omar Li,Omar,Li,555-555-0060,omar.li@example.com,Winter Festival,Nitin,TRUE
+61,Mei Hernandez,Mei,Hernandez,555-555-0061,mei.hernandez@example.com,"Winter Festival, Summer Fair",Simon,TRUE
+62,Leo Petrovic,Leo,Petrovic,555-555-0062,leo.petrovic@example.com,"Spring Awakening, Winter Festival",Simon,FALSE
+63,Anna Petrovic,Anna,Petrovic,555-555-0063,anna.petrovic@example.com,Summer Fair,Natalie,TRUE
+64,Mei Ivanova,Mei,Ivanova,555-555-0064,mei.ivanova@example.com,Spring Awakening,Marjorie,FALSE
+65,Aziz Ahmed,Aziz,Ahmed,555-555-0065,aziz.ahmed@example.com,"Spring Awakening, Fall Return",Simon,TRUE
+66,Yusuf Petrovic,Yusuf,Petrovic,555-555-0066,yusuf.petrovic@example.com,"Summer Fair, Winter Festival",Nitin,TRUE
+67,Jasper Brown,Jasper,Brown,555-555-0067,jasper.brown@example.com,Summer Fair,Simon,FALSE
+68,Fatima Ahmed,Fatima,Ahmed,555-555-0068,fatima.ahmed@example.com,Spring Awakening,Natalie,FALSE
+69,Kenji Nguyen,Kenji,Nguyen,555-555-0069,kenji.nguyen@example.com,Summer Fair,Marjorie,FALSE
+70,Hassan Abdi,Hassan,Abdi,555-555-0070,hassan.abdi@example.com,Spring Awakening,Natalie,FALSE
+71,Nina Li,Nina,Li,555-555-0071,nina.li@example.com,"Summer Fair, Spring Awakening",Simon,FALSE
+72,Mateo Nguyen,Mateo,Nguyen,555-555-0072,mateo.nguyen@example.com,Fall Return,Natalie,TRUE
+73,Freya Wang,Freya,Wang,555-555-0073,freya.wang@example.com,"Summer Fair, Spring Awakening",Nitin,FALSE
+74,Hazel Brown,Hazel,Brown,555-555-0074,hazel.brown@example.com,"Spring Awakening, Winter Festival",Nitin,TRUE
+75,Noah Nguyen,Noah,Nguyen,555-555-0075,noah.nguyen@example.com,Winter Festival,Simon,FALSE
+76,Ibrahim Zhang,Ibrahim,Zhang,555-555-0076,ibrahim.zhang@example.com,"Spring Awakening, Summer Fair",Marjorie,FALSE
+77,Chen Nguyen,Chen,Nguyen,555-555-0077,chen.nguyen@example.com,"Fall Return, Spring Awakening",Nitin,TRUE
+78,Elsa Ivanova,Elsa,Ivanova,555-555-0078,elsa.ivanova@example.com,"Fall Return, Spring Awakening",Nitin,TRUE
+79,Fatima Okafor,Fatima,Okafor,555-555-0079,fatima.okafor@example.com,"Fall Return, Spring Awakening",Simon,TRUE
+80,Zara Ivanova,Zara,Ivanova,555-555-0080,zara.ivanova@example.com,Summer Fair,Nitin,FALSE
+81,Takeshi Zhang,Takeshi,Zhang,555-555-0081,takeshi.zhang@example.com,Fall Return,Marjorie,FALSE
+82,Aziz Gonzalez,Aziz,Gonzalez,555-555-0082,aziz.gonzalez@example.com,Winter Festival,Simon,FALSE
+83,Zara Zhang,Zara,Zhang,555-555-0083,zara.zhang@example.com,Summer Fair,Nitin,TRUE
+84,Takeshi Al-Fulan,Takeshi,Al-Fulan,555-555-0084,takeshi.al-fulan@example.com,"Winter Festival, Spring Awakening",Simon,FALSE
+85,Kenji Zhang,Kenji,Zhang,555-555-0085,kenji.zhang@example.com,Summer Fair,Simon,TRUE
+86,Emily Sato,Emily,Sato,555-555-0086,emily.sato@example.com,Fall Return,Marjorie,FALSE
+87,Nora Zhang,Nora,Zhang,555-555-0087,nora.zhang@example.com,"Winter Festival, Summer Fair",Nitin,FALSE
+88,Hassan Wang,Hassan,Wang,555-555-0088,hassan.wang@example.com,Spring Awakening,Marjorie,TRUE
+89,Mateo Kaur,Mateo,Kaur,555-555-0089,mateo.kaur@example.com,Fall Return,Natalie,FALSE
+90,Luca Wang,Luca,Wang,555-555-0090,luca.wang@example.com,Fall Return,Nitin,FALSE
+91,Noah Chowdhury,Noah,Chowdhury,555-555-0091,noah.chowdhury@example.com,"Winter Festival, Summer Fair",Nitin,TRUE
+92,Hiro Nguyen,Hiro,Nguyen,555-555-0092,hiro.nguyen@example.com,Summer Fair,Nitin,TRUE
+93,Alina Patel,Alina,Patel,555-555-0093,alina.patel@example.com,"Spring Awakening, Summer Fair",Simon,FALSE
+94,Anna Li,Anna,Li,555-555-0094,anna.li@example.com,"Fall Return, Spring Awakening",Simon,FALSE
+95,Freya Wang,Freya,Wang,555-555-0095,freya.wang@example.com,Summer Fair,Nitin,FALSE
+96,Arjun Abdi,Arjun,Abdi,555-555-0096,arjun.abdi@example.com,"Fall Return, Winter Festival",Simon,TRUE
+97,Ravi Chowdhury,Ravi,Chowdhury,555-555-0097,ravi.chowdhury@example.com,"Spring Awakening, Fall Return",Marjorie,FALSE
+98,Fatima Zhang,Fatima,Zhang,555-555-0098,fatima.zhang@example.com,"Winter Festival, Fall Return",Simon,TRUE
+99,Omar Smith,Omar,Smith,555-555-0099,omar.smith@example.com,"Spring Awakening, Fall Return",Marjorie,TRUE
+100,Jasper Al-Fulan,Jasper,Al-Fulan,555-555-0100,jasper.al-fulan@example.com,Spring Awakening,Marjorie,TRUE
+101,Hiro Abdi,Hiro,Abdi,555-555-0101,hiro.abdi@example.com,Fall Return,Nitin,TRUE
+102,Mateo Johnson,Mateo,Johnson,555-555-0102,mateo.johnson@example.com,Fall Return,Nitin,TRUE
+103,Aisha Smith,Aisha,Smith,555-555-0103,aisha.smith@example.com,Summer Fair,Simon,TRUE
+104,Harpreet Al-Fulan,Harpreet,Al-Fulan,555-555-0104,harpreet.al-fulan@example.com,Winter Festival,Natalie,TRUE
+105,Leila Li,Leila,Li,555-555-0105,leila.li@example.com,"Spring Awakening, Summer Fair",Natalie,FALSE
+106,Yusuf Wang,Yusuf,Wang,555-555-0106,yusuf.wang@example.com,"Winter Festival, Spring Awakening",Nitin,FALSE
+107,Amara Ivanova,Amara,Ivanova,555-555-0107,amara.ivanova@example.com,Summer Fair,Natalie,FALSE
+108,Aisha Petrovic,Aisha,Petrovic,555-555-0108,aisha.petrovic@example.com,Fall Return,Nitin,FALSE
+109,Liam Osei,Liam,Osei,555-555-0109,liam.osei@example.com,"Winter Festival, Fall Return",Marjorie,FALSE
+110,Amara Sato,Amara,Sato,555-555-0110,amara.sato@example.com,Winter Festival,Nitin,FALSE

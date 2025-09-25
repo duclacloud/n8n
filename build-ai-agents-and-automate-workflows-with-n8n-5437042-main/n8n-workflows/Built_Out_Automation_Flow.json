@@ -1,0 +1,704 @@
+{
+  "name": "Built-Out-Automation-Flow",
+  "nodes": [
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {
+          "responseFormat": "json_object"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -560,
+        720
+      ],
+      "id": "4c916851-d010-4493-a1f6-8f87cbac23bb",
+      "name": "OpenAI Chat Model1"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.output.task_type }}",
+                    "rightValue": "get_info",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "8e22ea7f-2ad7-41e6-bd49-cceb4e8208ac"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "get_info"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "20ad4d6e-4450-4cee-9f16-4b284fcd9a58",
+                    "leftValue": "={{ $json.output.task_type }}",
+                    "rightValue": "update_info",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "update_info"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "ce592c07-6d4a-4673-87be-d856227977c4",
+                    "leftValue": "={{ $json.output.task_type }}",
+                    "rightValue": "out_of_scope",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "out_of_scope"
+            }
+          ]
+        },
+        "options": {
+          "allMatchingOutputs": true
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -220,
+        500
+      ],
+      "id": "4d8da249-1819-472b-b351-dce0eca9cacb",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"user_message\": {\n      \"type\": [\"string\", \"null\"]\n    },\n    \"task_type\": {\n      \"type\": \"string\",\n      \"enum\": [\"get_info\", \"update_info\", \"out_of_scope\"]\n    },\n    \"query_column\": {\n      \"type\": [\"string\", \"null\"]\n    },\n    \"query_value\": {\n      \"type\": [\"string\", \"null\"]\n    },\n    \"update_column\": {\n      \"type\": [\"string\", \"null\"]\n    },\n    \"update_value\": {\n      \"type\": [\"string\", \"null\"]\n    }\n  },\n  \"required\": [\"query\", \"task_type\", \"query_column\", \"query_value\"]\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        -440,
+        720
+      ],
+      "id": "9853cfbf-3a31-4626-a1b6-96ef966005e7",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        40,
+        220
+      ],
+      "id": "1ac62897-000f-45a1-8a91-5e7fee9fa1c2",
+      "name": "OpenAI Chat Model2"
+    },
+    {
+      "parameters": {
+        "description": "Get info from Google Sheet",
+        "workflowId": {
+          "__rl": true,
+          "value": "caxeA1kyx6lszkaN",
+          "mode": "list",
+          "cachedResultName": "My project — Row lookup"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "query_column": "={{ $('Switch').item.json.output.query_column }}",
+            "query_value": "={{ $('Switch').item.json.output.query_value }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "query_column",
+              "displayName": "query_column",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "query_value",
+              "displayName": "query_value",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        160,
+        220
+      ],
+      "id": "a1a96fce-2f5f-43a3-bc35-8c2723e4f1c4",
+      "name": "Filter Data"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        100,
+        1120
+      ],
+      "id": "9a68589c-f037-43f1-a070-49f82f399b9c",
+      "name": "OpenAI Chat Model3"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -820,
+        600
+      ],
+      "id": "0ae4b173-5040-43c8-8db3-2396731a86f5",
+      "name": "Placeholder chat",
+      "webhookId": "2d932846-23ab-49e0-a7c4-1fbe240827c7"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=QUERY: {{ $json.chatInput || $json.blocks[0].elements[0].elements[1].text}}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are a natural language interface to a Google Sheet. Your job is to convert user queries into structured JSON for downstream automation.\n\nRespond with a single JSON object using this schema:\n\n{\n  \"user_message\": string | null,\n  \"task_type\": \"get_info\" | \"update_info\" | \"out_of_scope\",\n  \"query_column\": string | null,\n  \"query_value\": string | null,\n  \"update_column\": string | null,\n  \"update_value\": string | null\n}\n\nAvailable columns in the Google Sheet:\n- ID  \n- Full Name\n- First Name  \n- Last Name  \n- Phone\n- Email\n- Events\n- Manager\n- Active\n\nRules:\n\n1. If the user is **asking for information**, set:\n   - \"task_type\": \"get_info\"\n   - \"query_column\" = the column to search\n   - \"query_value\" = the value to match in that column\n\n2. If the user wants to **update a value**, set:\n   - \"task_type\": \"update_info\"\n   - \"query_column\" = the column to search\n   - \"query_value\" = the value to match in that column\n   - \"update_column\": the column to be updated\n   - \"update_value\": the updated value\n\n3. If the user query is **irrelevant or not about the sheet**, set:\n   - \"task_type\": \"out_of_scope\"\n   - \"query_column\": null\n   - \"query_value\": null\n\nAdditional logic:\n   - If the user mentions only a **first name**, use:\n     - \"query_column\": \"First Name\"\n     - \"query_value\": the name mentioned\n   - If the user says **\"Who is X's manager?\"** or similar phrasing:\n     - Treat X as a **person being managed**\n     - Set \"query_column\": \"First Name\"\n     - Set \"query_value\": X\n   - If the user says **\"Who is managed by X\"**, **\"X’s team\"**, **\"X’s volunteers\"**, or **\"people under X\"**, treat X as a **Manager**:\n     - Set \"query_column\": \"Manager\"\n     - Set \"query_value\": X\n   - If the user asks for updates using just a first name, use \"First Name\" as the query_column.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -600,
+        500
+      ],
+      "id": "f11d6347-e3ac-4610-bcdd-33e60054dea2",
+      "name": "Intent analysis agent"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=REQUEST:  {{ $json.output.user_message }}\nTOOL: Get Google Sheets data\n\nPass the following to the tool:\n\n\"query_column\": {{ $json.output.query_column }}\n\"query_value\": {{ $json.output.query_value }}\n\n\nIf tool returns no information, it's most likely because there are no matching entries or because the user misspelled something in the REQUEST. Explain that REQUEST can't be fulfilled and suggest checking the spelling or going directly to the spreadsheet.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "fb1116cf-ac49-4014-976a-77caf958e35c",
+      "name": "Information Agent"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=REQUEST: {{ $json.output.user_message }}\n\nTell the user you can't complete their request. Explain why based on ",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        0,
+        900
+      ],
+      "id": "08e1b3e5-aa80-4621-8583-87ee1fbb4e5f",
+      "name": "Response Agent"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=REQUEST: {{ $json.output.user_message }}\n\n## TOOLS:\n- Filter Data: Returns the relevant DATA\n- Update Google Sheets: Updates the specified rows\n\n## Step by Step process:\n1. Use the Filter Data tool with the following data:\n   - \"query_column\": {{ $json.output.query_column }}\n   - \"query_value\": {{ $json.output.query_value }}\n2. Use the Update Google Sheets tool with the following data:\n   - Column to Match On: ID from the returned data\n   - Update column: {{ $json.output.update_column }}\n   - Update value: {{ $json.output.update_value }}\n   - \"Last Updated\" column: {{ DateTime.fromISO($now).toFormat(\"M/d/yyyy HH:mm:ss\") }}\n3. Use the Filter Data tool again with the following data:\n   - \"query_column\": {{ $json.output.query_column }}\n   - \"query_value\": {{ $json.output.query_value }}\n4. Verify that the correct data has been updated as per REQUEST\n",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        0,
+        400
+      ],
+      "id": "0fc2c08e-561b-4ab3-8585-79fad71a65eb",
+      "name": "Update Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        40,
+        620
+      ],
+      "id": "2adb5311-2699-4e6e-a56f-1751425935b9",
+      "name": "OpenAI Chat Model"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "13psI0SoLbp8zJDxSmUfkgtyVIa_EvljZFHEWwLiOgmU",
+          "mode": "list",
+          "cachedResultName": "Volunteer-Index",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/13psI0SoLbp8zJDxSmUfkgtyVIa_EvljZFHEWwLiOgmU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 947857365,
+          "mode": "list",
+          "cachedResultName": "Short",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/13psI0SoLbp8zJDxSmUfkgtyVIa_EvljZFHEWwLiOgmU/edit#gid=947857365"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "ID": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('ID', ``, 'string') }}",
+            "Last Name": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Last_Name', ``, 'string') }}",
+            "First Name": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('First_Name', ``, 'string') }}",
+            "Full name": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Full_name', ``, 'string') }}",
+            "LinkedIn": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('LinkedIn', ``, 'string') }}",
+            "Bio": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Bio', ``, 'string') }}",
+            "Subject Area": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Subject_Area', ``, 'string') }}",
+            "Content Manager": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Content_Manager', ``, 'string') }}",
+            "Last updated": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Last_updated', ``, 'string') }}",
+            "Active": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Active', ``, 'string') }}"
+          },
+          "matchingColumns": [
+            "ID"
+          ],
+          "schema": [
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Last Name",
+              "displayName": "Last Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "First Name",
+              "displayName": "First Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Full name",
+              "displayName": "Full name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "LinkedIn",
+              "displayName": "LinkedIn",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Bio",
+              "displayName": "Bio",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Subject Area",
+              "displayName": "Subject Area",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Content Manager",
+              "displayName": "Content Manager",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Last updated",
+              "displayName": "Last updated",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Active",
+              "displayName": "Active",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.6,
+      "position": [
+        160,
+        620
+      ],
+      "id": "7005d2b7-2743-4bde-9342-520b7bb2231d",
+      "name": "Update Google Sheets",
+      "alwaysOutputData": false,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "trigger": [
+          "app_mention"
+        ],
+        "channelId": {
+          "__rl": true,
+          "value": "C090ZCG4FEK",
+          "mode": "list",
+          "cachedResultName": "instructors"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.slackTrigger",
+      "typeVersion": 1,
+      "position": [
+        -820,
+        400
+      ],
+      "id": "1cf104a9-fbc9-42f5-9cdc-561d5166b23b",
+      "name": "Slack Trigger",
+      "webhookId": "9ce6c2e0-4f41-42c6-8015-aae51039ad63"
+    },
+    {
+      "parameters": {
+        "select": "=channel",
+        "channelId": {
+          "__rl": true,
+          "value": "={{ $('Slack Trigger').item.json.channel }}",
+          "mode": "id"
+        },
+        "user": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "text": "={{ $json.output }}",
+        "otherOptions": {}
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        380,
+        500
+      ],
+      "id": "b3e1b9ba-0df1-4292-8f22-13ef1a357ff1",
+      "name": "Slack",
+      "webhookId": "982cf660-7a7c-48bf-b569-a3ed0e218c84"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Intent analysis agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Intent analysis agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Information Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Response Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Information Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter Data": {
+      "ai_tool": [
+        [
+          {
+            "node": "Information Agent",
+            "type": "ai_tool",
+            "index": 0
+          },
+          {
+            "node": "Update Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Response Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Placeholder chat": {
+      "main": [
+        [
+          {
+            "node": "Intent analysis agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Intent analysis agent": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Information Agent": {
+      "main": [
+        [
+          {
+            "node": "Slack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Update Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Google Sheets": {
+      "ai_tool": [
+        [
+          {
+            "node": "Update Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Slack Trigger": {
+      "main": [
+        [
+          {
+            "node": "Intent analysis agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Agent": {
+      "main": [
+        [
+          {
+            "node": "Slack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Response Agent": {
+      "main": [
+        [
+          {
+            "node": "Slack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "336c52de-8b53-43df-8f0f-839c23a13ebd",
+  "meta": {
+    "instanceId": "ed77a1088e08a9eccce9070268caa5dd20bfd414a6a8c2de93a95e286ec83442"
+  },
+  "id": "3NDkVMIkJhRoWUC3",
+  "tags": []
+}

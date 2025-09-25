@@ -1,0 +1,198 @@
+{
+  "name": "Volunteer Lookup",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "fb0a16b5-74d9-45f5-998d-6e012cb07903",
+      "name": "When chat message received",
+      "webhookId": "733fe2c8-9bb7-44f8-8d63-c982c6839664"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.chatInput || $json.blocks[0].elements[0].elements[1].text }}",
+        "options": {
+          "systemMessage": "=You are a helpful assistant\n\n## Column headings\n- ID\n- Full Name\n- First Name\n- Last Name\n- Phone\n- Email\n- Events\n- Manager\n- Active"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        220,
+        0
+      ],
+      "id": "0d85cc95-fede-41f2-a9ab-2694e1a352b2",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        260,
+        220
+      ],
+      "id": "aa4020d2-adad-4a90-ad5d-782b08202cdb",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "D6EYsiPAxOmaCR4B",
+          "name": "OpenAi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sseEndpoint": "https://mor10.app.n8n.cloud/mcp/45c6331b-2d67-48bd-8304-ae02c6956383/sse"
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1,
+      "position": [
+        380,
+        220
+      ],
+      "id": "13330228-b28d-4d4f-a00b-3f6337a4fa7e",
+      "name": "MCP Client"
+    },
+    {
+      "parameters": {
+        "trigger": [
+          "app_mention"
+        ],
+        "channelId": {
+          "__rl": true,
+          "value": "C08R22NASU9",
+          "mode": "list",
+          "cachedResultName": "general"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.slackTrigger",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        -140
+      ],
+      "id": "df6eaf73-a16b-4240-88e7-a0ce4318ee68",
+      "name": "Slack Trigger",
+      "webhookId": "ab8f73d7-1a06-4349-b251-bbd84660ccb4",
+      "credentials": {
+        "slackApi": {
+          "id": "cuaeYC8bU3OKgC0q",
+          "name": "Slack account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "={{ $('Slack Trigger').item.json.channel }}",
+          "mode": "id"
+        },
+        "text": "={{ $json.output }}",
+        "otherOptions": {}
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        580,
+        0
+      ],
+      "id": "7143220e-1cc4-4130-b6ab-d6583835ed2a",
+      "name": "Slack",
+      "webhookId": "128bdcd7-891b-4540-a2f7-205f2e484cc1",
+      "credentials": {
+        "slackApi": {
+          "id": "cuaeYC8bU3OKgC0q",
+          "name": "Slack account 3"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MCP Client": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Slack Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Slack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "81b960e2-e447-42ad-9868-30b127d080e1",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ed77a1088e08a9eccce9070268caa5dd20bfd414a6a8c2de93a95e286ec83442"
+  },
+  "id": "9LPmsF8JEHC60IJb",
+  "tags": []
+}

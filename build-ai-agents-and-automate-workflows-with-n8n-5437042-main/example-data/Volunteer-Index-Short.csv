@@ -1,0 +1,10 @@
+ID,Full Name,First Name,Last Name,Phone,Email,Events,Manager,Active
+1,Aisha Chowdhury,Aisha,Chowdhury,555-555-0001,aisha.c@example.com,"Summer Fair, Fall Return",Marjorie,TRUE
+2,Takeshi Sato,Takeshi,Sato,555-555-0002,takeshi.s@example.com,Winter Festival,Nitin,TRUE
+3,Manpreet Kaur,Manpreet,Kaur,555-555-0003,manpreet.k@example.com,"Fall Return, Spring Awakening",Natalie,FALSE
+4,Sofia Hernandez,Sofia,Hernandez,555-555-0004,sofia.h@example.com,Spring Awakening,Simon,FALSE
+5,Ethan Smith,Ethan,Smith,555-555-0005,ethan.s@example.com,"Summer Fair, Winter Festival",Natalie,TRUE
+6,Wei Zhang,Wei,Zhang,555-555-0006,wei.z@example.com,"Winter Festival, Spring Awakening",Marjorie,FALSE
+7,Layla Johnson,Layla,Johnson,555-555-0007,layla.j@example.com,Fall Return,Nitin,TRUE
+8,Michael Osei,Michael,Osei,555-555-0008,michael.o@example.com,"Spring Awakening, Summer Fair",Simon,TRUE
+9,Jasmin Petrovic,Jasmin,Petrovic,555-555-0009,jasmin.p@example.com,"Summer Fair, Fall Return",Natalie,FALSE
